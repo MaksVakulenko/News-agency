@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from newspaper.models import Redactor
+
+admin.site.register(Redactor)
