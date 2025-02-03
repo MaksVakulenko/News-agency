@@ -1,28 +1,46 @@
 from django.urls import path
-from . import views
+from .views import (
+    NewspaperListView,
+    NewspaperDetailView,
+    NewspaperCreateView,
+    NewspaperUpdateView,
+    NewspaperDeleteView,
+    TopicListView,
+    TopicCreateView,
+    TopicUpdateView,
+    TopicDeleteView,
+    RedactorListView,
+    RedactorDetailView,
+)
 
 app_name = "newspaper"
 
 urlpatterns = [
-    path("", views.NewspaperListView.as_view(), name="newspaper-list"),
+    path("", NewspaperListView.as_view(), name="newspaper-list"),
     path(
         "newspaper/<int:pk>/",
-        views.NewspaperDetailView.as_view(),
+        NewspaperDetailView.as_view(),
         name="newspaper-detail",
     ),
     path(
         "newspaper/create/",
-        views.NewspaperCreateView.as_view(),
+        NewspaperCreateView.as_view(),
         name="newspaper-create",
     ),
     path(
         "newspaper/<int:pk>/update/",
-        views.NewspaperUpdateView.as_view(),
+        NewspaperUpdateView.as_view(),
         name="newspaper-update",
     ),
     path(
         "newspaper/<int:pk>/delete/",
-        views.NewspaperDeleteView.as_view(),
+        NewspaperDeleteView.as_view(),
         name="newspaper-delete",
     ),
+    path("topic/", TopicListView.as_view(), name="topic-list"),
+    path("topic/create/", TopicCreateView.as_view(), name="topic-create"),
+    path("topic/<int:pk>/update/", TopicUpdateView.as_view(), name="topic-update"),
+    path("topic/<int:pk>/delete/", TopicDeleteView.as_view(), name="topic-delete"),
+    path("redactors/", RedactorListView.as_view(), name="redactor-list"),
+    path("redactor/<int:pk>/", RedactorDetailView.as_view(), name="redactor-detail"),
 ]

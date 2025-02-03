@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Topics</h1>
+  <a href="{% url 'newspaper:topic-create' %}">Create Topic</a>
+  <ul>
+    {% for topic in topics %}
+      <li>
+        {{ topic.name }}
+        <a href="{% url 'newspaper:topic-update' topic.pk %}">Update</a>
+        <a href="{% url 'newspaper:topic-delete' topic.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

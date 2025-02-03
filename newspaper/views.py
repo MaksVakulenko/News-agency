@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Newspaper
+from .models import Newspaper, Topic, Redactor
 from .forms import NewspaperForm
 
 
@@ -34,3 +34,41 @@ class NewspaperDeleteView(generic.DeleteView):
     model = Newspaper
     template_name = "newspaper/newspaper_confirm_delete.html"
     success_url = reverse_lazy("newspaper:newspaper-list")
+
+
+class TopicListView(generic.ListView):
+    model = Topic
+    template_name = "newspaper/topic_list.html"
+    context_object_name = "topics"
+
+
+class TopicCreateView(generic.CreateView):
+    model = Topic
+    fields = ["name"]
+    template_name = "newspaper/topic_form.html"
+    success_url = reverse_lazy("newspaper:topic-list")
+
+
+class TopicUpdateView(generic.UpdateView):
+    model = Topic
+    fields = ["name"]
+    template_name = "newspaper/topic_form.html"
+    success_url = reverse_lazy("newspaper:topic-list")
+
+
+class TopicDeleteView(generic.DeleteView):
+    model = Topic
+    template_name = "newspaper/topic_confirm_delete.html"
+    success_url = reverse_lazy("newspaper:topic-list")
+
+
+class RedactorListView(generic.ListView):
+    model = Redactor
+    template_name = "newspaper/redactor_list.html"
+    context_object_name = "redactors"
+
+
+class RedactorDetailView(generic.DetailView):
+    model = Redactor
+    template_name = "newspaper/redactor_detail.html"
+    context_object_name = "redactor"

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="delete-confirmation">
+    <h1>Delete Topic</h1>
+    <p>Are you sure you want to delete "{{ topic.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="actions">
+        <button type="submit">Submit</button>
+        <a href="{% url 'newspaper:topic-list' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
