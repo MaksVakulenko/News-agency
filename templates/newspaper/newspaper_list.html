@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>newspapers</h1>
+  <a href="{% url 'newspaper:newspaper-create' %}">Create newspaper</a>
+  <ul>
+    {% for newspaper in newspapers %}
+      <li>
+        {{ newspaper.title }}
+        <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">More</a>
+        <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}">Update</a>
+        <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

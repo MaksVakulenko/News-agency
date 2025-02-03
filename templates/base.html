@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Newspaper Tracker{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+{% block sidebar %}
+  {% include "includes/sidebar.html" %}
+{% endblock %}
+<div class="main-content">
+  {% block content %}{% endblock %}
+</div>
+</body>
+
+</html>

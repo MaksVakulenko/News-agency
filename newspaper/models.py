@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 class Topic(models.Model):
@@ -23,7 +24,7 @@ class Redactor(AbstractUser):
 class Newspaper(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(null=True, blank=True, default=timezone.now)
     topic = models.ManyToManyField(Topic, related_name="newspapers")
     publishers = models.ManyToManyField(Redactor, related_name="newspapers")
 

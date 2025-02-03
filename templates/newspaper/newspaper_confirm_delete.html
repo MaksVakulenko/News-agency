@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="delete-confirmation">
+    <h1>Delete newspaper</h1>
+    <p>Are you sure you want to delete "{{ newspaper.title }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="actions">
+        <button type="submit" , class="btn btn-danger">Submit</button>
+        <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

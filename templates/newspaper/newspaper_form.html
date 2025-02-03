@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="form-container">
+    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} newspaper</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-actions">
+        <button type="submit" , class="btn btn-primary">Submit</button>
+        <a href="{% url 'newspaper:newspaper-list' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
