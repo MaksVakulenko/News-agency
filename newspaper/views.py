@@ -1,11 +1,13 @@
-from django.urls import reverse_lazy
 from django.views import generic
+from .forms import NewspaperForm, RedactorCreationForm
+from .models import Newspaper, Topic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import NewspaperForm
-from .models import Newspaper, Topic, Redactor
+from django.urls import reverse_lazy
+from .models import Redactor
 
 
-class NewspaperListView(generic.ListView):
+class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     context_object_name = "newspapers"
@@ -29,66 +31,86 @@ class NewspaperListView(generic.ListView):
         return queryset
 
 
-class NewspaperDetailView(generic.DetailView):
+class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
     template_name = "newspaper/newspaper_detail.html"
 
 
-class NewspaperCreateView(generic.CreateView):
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     form_class = NewspaperForm
     template_name = "newspaper/newspaper_form.html"
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
-class NewspaperUpdateView(generic.UpdateView):
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     form_class = NewspaperForm
     template_name = "newspaper/newspaper_form.html"
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
-class NewspaperDeleteView(generic.DeleteView):
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     template_name = "newspaper/newspaper_confirm_delete.html"
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
-class TopicListView(generic.ListView):
+class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     template_name = "newspaper/topic_list.html"
     context_object_name = "topics"
     paginate_by = 10
 
 
-class TopicCreateView(generic.CreateView):
+class TopicCreateView(LoginRequiredMixin, generic.CreateView):
     model = Topic
     fields = ["name"]
     template_name = "newspaper/topic_form.html"
     success_url = reverse_lazy("newspaper:topic-list")
 
 
-class TopicUpdateView(generic.UpdateView):
+class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Topic
     fields = ["name"]
     template_name = "newspaper/topic_form.html"
     success_url = reverse_lazy("newspaper:topic-list")
 
 
-class TopicDeleteView(generic.DeleteView):
+class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     template_name = "newspaper/topic_confirm_delete.html"
     success_url = reverse_lazy("newspaper:topic-list")
 
 
-class RedactorListView(generic.ListView):
+class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     template_name = "newspaper/redactor_list.html"
     context_object_name = "redactors"
     paginate_by = 6
 
 
-class RedactorDetailView(generic.DetailView):
+class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
     template_name = "newspaper/redactor_detail.html"
     context_object_name = "redactor"
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+    template_name = "newspaper/redactor_form.html"
+    success_url = reverse_lazy("newspaper:redactor-list")
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    fields = ["username", "first_name", "last_name", "email", "years_of_experience"]
+    template_name = "newspaper/redactor_form.html"
+    success_url = reverse_lazy("newspaper:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    template_name = "newspaper/redactor_confirm_delete.html"
+    success_url = reverse_lazy("newspaper:redactor-list")

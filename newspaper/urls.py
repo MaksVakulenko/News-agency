@@ -11,6 +11,9 @@ from .views import (
     TopicDeleteView,
     RedactorListView,
     RedactorDetailView,
+    RedactorCreateView,
+    RedactorUpdateView,
+    RedactorDeleteView,
 )
 
 app_name = "newspaper"
@@ -43,4 +46,15 @@ urlpatterns = [
     path("topic/<int:pk>/delete/", TopicDeleteView.as_view(), name="topic-delete"),
     path("redactors/", RedactorListView.as_view(), name="redactor-list"),
     path("redactor/<int:pk>/", RedactorDetailView.as_view(), name="redactor-detail"),
+    path("redactor/create/", RedactorCreateView.as_view(), name="redactor-create"),
+    path(
+        "redactor/<int:pk>/update/",
+        RedactorUpdateView.as_view(),
+        name="redactor-update",
+    ),
+    path(
+        "redactor/<int:pk>/delete/",
+        RedactorDeleteView.as_view(),
+        name="redactor-delete",
+    ),
 ]
