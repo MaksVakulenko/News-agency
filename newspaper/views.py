@@ -9,6 +9,7 @@ class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     context_object_name = "newspapers"
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -57,6 +58,7 @@ class TopicListView(generic.ListView):
     model = Topic
     template_name = "newspaper/topic_list.html"
     context_object_name = "topics"
+    paginate_by = 10
 
 
 class TopicCreateView(generic.CreateView):
@@ -83,6 +85,7 @@ class RedactorListView(generic.ListView):
     model = Redactor
     template_name = "newspaper/redactor_list.html"
     context_object_name = "redactors"
+    paginate_by = 6
 
 
 class RedactorDetailView(generic.DetailView):

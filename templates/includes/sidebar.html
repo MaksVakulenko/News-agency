@@ -1,7 +1,10 @@
-<div class="sidebar">
-  <ul>
-    <li><a href="{% url 'newspaper:newspaper-list' %}">Home</a></li>
-    <li><a href="{% url 'newspaper:topic-list' %}">Topics</a></li>
-    <li><a href="{% url 'newspaper:redactor-list' %}">Publishers</a></li>
-  </ul>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">News Agency</a>
+    <div class="navbar-nav">
+      <a class="nav-link" href="{% url 'newspaper:newspaper-list' %}">Home</a>
+      <a class="nav-link" href="{% url 'newspaper:topic-list' %}">Topics</a>
+      <a class="nav-link" href="{% url 'newspaper:redactor-list' %}">Publishers</a>
+    </div>
+  </div>
+</nav>

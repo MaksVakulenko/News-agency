@@ -103,3 +103,35 @@ h2 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.create-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: inline-block;
+}
+
+.create-btn:hover {
+    background-color: #218838;
+    text-decoration: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    padding: 8px 16px;
+    border-radius: 4px;
+}

@@ -3,7 +3,11 @@
 {% block content %}
   <div class="container py-4">
     <h2 class="text-center mb-4 text-primary fw-bold">Newspapers</h2>
-    <!-- Search Form -->
+
+    <div class="d-flex justify-content-center mb-4">
+      <a href="{% url 'newspaper:newspaper-create' %}" class="create-btn">Create New Newspaper</a>
+    </div>
+
     <div class="search-container mb-4 p-3 bg-light rounded shadow-sm">
       <form method="get" class="row g-2 align-items-center">
         <div class="col-md-5 position-relative">
@@ -33,7 +37,6 @@
         </div>
       </form>
     </div>
-
 
     <div class="row">
       {% for newspaper in newspapers %}
