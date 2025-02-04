@@ -1,30 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container py-4">
+  <form method="get" class="row g-2 align-items-center">
+    <div class="col-md-5 position-relative">
+      <input type="text" name="search" class="form-control"
+             placeholder="Search..." value="{{ request.GET.search|default:'' }}">
+    </div>
+    <div class="col-md-3 text-md-end">
+      <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+  </form>
+  
+  <div class="container py-4">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="m-0">Topics</h2>
-    <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary">
-      <i class="fas fa-plus">+</i>
-    </a>
-  </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="m-0">Topics</h2>
+      <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary">
+        <i class="fas fa-plus">+</i>
+      </a>
+    </div>
 
-  <div class="list-group">
-    {% for topic in topics %}
-      <div class="list-group-item d-flex justify-content-between align-items-center">
-        <span>{{ topic.name }}</span>
-        <div class="btn-group">
-          <a href="{% url 'newspaper:topic-update' topic.pk %}" 
-             class="btn btn-sm btn-outline-secondary">
-            Update
-          </a>
-          <a href="{% url 'newspaper:topic-delete' topic.pk %}" 
-             class="btn btn-sm btn-outline-danger">
-            Delete
-          </a>
+    <div class="list-group">
+      {% for topic in topics %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>{{ topic.name }}</span>
+          <div class="btn-group">
+            <a href="{% url 'newspaper:topic-update' topic.pk %}"
+               class="btn btn-sm btn-outline-secondary">
+              Update
+            </a>
+            <a href="{% url 'newspaper:topic-delete' topic.pk %}"
+               class="btn btn-sm btn-outline-danger">
+              Delete
+            </a>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-</div>
 {% endblock %}

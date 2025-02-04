@@ -5,9 +5,9 @@
     <p>Are you sure you want to delete "{{ newspaper.title }}"?</p>
     <form method="post">
       {% csrf_token %}
-      <div class="actions">
+      <div class="form-actions">
         <button type="submit" class="btn btn-danger">Submit</button>
-        <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">Cancel</a>
+        <a href="{% url 'newspaper:newspaper-list' %}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
   </div>

@@ -1,13 +1,14 @@
-
 {% extends "base.html" %}
 {% block content %}
-<div class="container py-4">
-  <h2>Delete redactor</h2>
-  <p>Are you sure you want to delete "{{ redactor.get_full_name }}"?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Submit</button>
-    <a href="{% url 'newspaper:redactor-list' %}" class="btn btn-secondary">Cancel</a>
-  </form>
-</div>
+  <div class="container py-4">
+    <h2>Delete redactor</h2>
+    <p>Are you sure you want to delete "{{ redactor.get_full_name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-danger">Submit</button>
+        <a href="{% url 'newspaper:redactor-list' %}" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
 {% endblock %}

@@ -107,16 +107,17 @@ h2 {
 .create-btn {
     background-color: #28a745;
     color: white;
-    font-size: 1.2rem;
     padding: 15px 30px;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
     display: inline-block;
+    margin-bottom: 20px;
 }
 
 .create-btn:hover {
     background-color: #218838;
+    color: white;
     text-decoration: none;
 }
 

@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-  <div class="form-container">
+  <div class="container py-4">
     <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} newspaper</h1>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form|crispy }}
       <div class="form-actions">
-        <button type="submit"  class="btn btn-primary">Submit</button>
-        <a href="{% url 'newspaper:newspaper-list' %}">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'newspaper:newspaper-list' %}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
   </div>

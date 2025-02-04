@@ -1,27 +1,34 @@
 {% extends "base.html" %}
+
 {% block content %}
-  <div class="newspaper-detail">
-    <h1>{{ newspaper.title }}</h1>
-    <p class="date">{{ newspaper.pub_date }}</p>
-    <div class="content">
-      {{ newspaper.content }}
-    </div>
-    <div class="topics">
-      <h3>Topics:</h3>
-      {% for topic in newspaper.topic.all %}
-        <span>{{ topic.name }}</span>
-      {% endfor %}
-    </div>
-    <div class="publishers">
-      <h3>Publishers:</h3>
-      {% for publisher in newspaper.publishers.all %}
-        <span>{{ publisher.get_full_name }}</span>
-      {% endfor %}
-    </div>
-    <div class="actions">
-      <a href="{% url 'newspaper:newspaper-list' %}">Back to list</a>
-      <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}">Update</a>
-      <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}">Delete</a>
+  <div class="newspaper-detail card">
+    <div class="card-body">
+      <h1 class="card-title">{{ newspaper.title }}</h1>
+      <p class="text-muted">{{ newspaper.pub_date }}</p>
+      
+      <div class="card-text">
+        {{ newspaper.content }}
+      </div>
+
+      <div class="topics">
+        <h3>Topics:</h3>
+        {% for topic in newspaper.topic.all %}
+          <span class="badge badge-primary">{{ topic.name }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="publishers">
+        <h3>Publishers:</h3>
+        {% for publisher in newspaper.publishers.all %}
+          <span class="badge badge-secondary">{{ publisher.get_full_name }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="btn-group">
+        <a href="{% url 'newspaper:newspaper-list' %}" class="btn btn-sm btn-secondary">Back</a>
+        <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}" class="btn btn-sm btn-warning">Update</a>
+        <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}" class="btn btn-sm btn-danger">Delete</a>
+      </div>
     </div>
   </div>
 {% endblock %}

@@ -1,14 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 {% block content %}
-<div class="container py-4">
-  <h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Redactor</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <a href="{% url 'newspaper:redactor-list' %}" class="btn btn-secondary">Cancel</a>
-    </div>
-  </form>
-</div>
+  <div class="container py-4">
+    <h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Redactor</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'newspaper:redactor-list' %}" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
 {% endblock %}
