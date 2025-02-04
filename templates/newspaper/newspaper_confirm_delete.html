@@ -6,7 +6,7 @@
     <form method="post">
       {% csrf_token %}
       <div class="actions">
-        <button type="submit" , class="btn btn-danger">Submit</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
         <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">Cancel</a>
       </div>
     </form>

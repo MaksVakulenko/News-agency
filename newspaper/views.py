@@ -1,14 +1,31 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Newspaper, Topic, Redactor
+
 from .forms import NewspaperForm
+from .models import Newspaper, Topic, Redactor
 
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     context_object_name = "newspapers"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["topics"] = Topic.objects.all()
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search = self.request.GET.get("search")
+        topic = self.request.GET.get("topic")
+
+        if search:
+            queryset = queryset.filter(title__icontains=search)
+        if topic:
+            queryset = queryset.filter(topic__id=topic)
+
+        return queryset
 
 
 class NewspaperDetailView(generic.DetailView):

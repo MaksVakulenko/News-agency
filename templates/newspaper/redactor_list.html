@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Redactors</h1>
-  <ul>
-    {% for redactor in redactors %}
-      <li>
-        <a href="{% url 'newspaper:redactor-detail' redactor.pk %}">
-          {{ redactor.get_full_name }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-{% endblock %}
+<div class="container py-4">
+  <h2 class="mb-4">Publishers List</h2>
   
+  <div class="row">
+    {% for redactor in redactors %}
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'newspaper:redactor-detail' redactor.pk %}" 
+                 class="text-decoration-none">
+                {{ redactor.get_full_name }}
+              </a>
+            </h5>
+            <p class="card-text">
+              <small class="text-muted">
+                Experience: {{ redactor.years_of_experience }} years
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

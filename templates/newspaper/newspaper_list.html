@@ -1,15 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-  <h1>newspapers</h1>
-  <a href="{% url 'newspaper:newspaper-create' %}">Create newspaper</a>
-  <ul>
-    {% for newspaper in newspapers %}
-      <li>
-        {{ newspaper.title }}
-        <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">More</a>
-        <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}">Update</a>
-        <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}">Delete</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="container py-4">
+    <h2 class="text-center mb-4 text-primary fw-bold">Newspapers</h2>
+    <!-- Search Form -->
+    <div class="search-container mb-4 p-3 bg-light rounded shadow-sm">
+      <form method="get" class="row g-2 align-items-center">
+        <div class="col-md-5 position-relative">
+          <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Search newspapers..."
+              value="{{ request.GET.search|default:'' }}">
+
+          <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-muted"></i>
+        </div>
+        <div class="col-md-4">
+          <select name="topic" class="form-select">
+            <option value="">All Topics</option>
+            {% for topic in topics %}
+              <option value="{{ topic.id }}"
+                  {% if request.GET.topic|stringformat:"s" == topic.id|stringformat:"s" %}
+                      selected{% endif %}>
+                {{ topic.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3 text-md-end">
+          <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="row">
+      {% for newspaper in newspapers %}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}" class="card-link">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ newspaper.title }}</h5>
+                <p class="card-text">{{ newspaper.content|truncatewords:30 }}</p>
+              </div>
+            </a>
+            <div class="btn-group">
+              <a href="{% url 'newspaper:newspaper-update' newspaper.pk %}" class="btn btn-sm btn-warning">Edit</a>
+              <a href="{% url 'newspaper:newspaper-delete' newspaper.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

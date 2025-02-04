@@ -1,0 +1,105 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.card-text {
+    color: #495057;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-sm {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    border: none;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #c0392b;
+    border: none;
+    color: white;
+}
+
+.btn-warning:hover, .btn-danger:hover {
+    opacity: 0.85;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 2rem;
+}
+
+.search-container input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.text-muted {
+    font-size: 13px;
+    color: #999;
+}
+
+.row {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
