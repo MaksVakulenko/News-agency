@@ -6,17 +6,35 @@
 
     <div class="search-container mb-4 p-3 bg-light rounded shadow-sm">
       <form method="get" class="row g-2 align-items-center">
-        <div class="col-md-5 position-relative">
+        <div class="col-md-3 position-relative">
           <input
               type="text"
               name="search"
               class="form-control"
               placeholder="Search newspapers..."
               value="{{ request.GET.search|default:'' }}">
-
-          <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-muted"></i>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+          <div class="input-group">
+            <span class="input-group-text">from</span>
+            <input
+                type="date"
+                name="date_from"
+                class="form-control"
+                value="{{ request.GET.date_from|default:'' }}">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <span class="input-group-text">to</span>
+            <input
+                type="date"
+                name="date_to"
+                class="form-control"
+                value="{{ request.GET.date_to|default:'' }}">
+          </div>
+        </div>
+        <div class="col-md-2">
           <select name="topic" class="form-select">
             <option value="">All Topics</option>
             {% for topic in topics %}
@@ -26,10 +44,9 @@
                 {{ topic.name }}
               </option>
             {% endfor %}
-
           </select>
         </div>
-        <div class="col-md-3 text-md-end">
+        <div class="col-md-1 text-md-end">
           <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
       </form>

@@ -47,11 +47,13 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.prefetch_related('publishers', 'topic')
-        topic_id = self.request.GET.get("topic")
+        date_from = self.request.GET.get("date_from")
+        date_to = self.request.GET.get("date_to")
 
-        if topic_id:
-            queryset = queryset.filter(topic__id=topic_id)
+        if date_from:
+            queryset = queryset.filter(pub_date__gte=date_from)
+        if date_to:
+            queryset = queryset.filter(pub_date__lte=date_to)
 
         return queryset
 
@@ -61,7 +63,7 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "newspaper/newspaper_detail.html"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('publishers', 'topic')
+        return super().get_queryset().prefetch_related("publishers", "topic")
 
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
@@ -126,7 +128,7 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "redactor"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('newspapers')
+        return super().get_queryset().prefetch_related("newspapers")
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
