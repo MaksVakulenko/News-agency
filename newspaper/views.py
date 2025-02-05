@@ -47,6 +47,7 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        queryset = queryset.prefetch_related('publishers', 'topic')
         topic_id = self.request.GET.get("topic")
 
         if topic_id:
@@ -58,6 +59,9 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
     template_name = "newspaper/newspaper_detail.html"
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('publishers', 'topic')
 
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
@@ -120,6 +124,9 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
     template_name = "newspaper/redactor_detail.html"
     context_object_name = "redactor"
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('newspapers')
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
