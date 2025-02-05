@@ -1,30 +1,37 @@
 {% extends "base.html" %}
+
 {% block content %}
-  <div class="redactor-detail">
-    <h1>{{ redactor.get_full_name }}</h1>
-    <div class="redactor-info">
-      <p><strong>Username:</strong> {{ redactor.username }}</p>
-      <p><strong>Email:</strong> {{ redactor.email }}</p>
-      <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }} years</p>
-    </div>
-    <div class="newspapers">
-      <h2>Editor's Newspapers</h2>
-      {% if redactor.newspapers.all %}
-        <ul>
-          {% for newspaper in redactor.newspapers.all %}
-            <li>
-              <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}">
+  <div class="newspaper-detail card">
+    <div class="card-body">
+      <h1 class="card-title">{{ redactor.get_full_name }}</h1>
+      
+      <div class="card-text">
+        <p><strong>Username:</strong> {{ redactor.username }}</p>
+        <p><strong>Email:</strong> {{ redactor.email }}</p>
+        <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }} years</p>
+      </div>
+
+      <div class="newspapers">
+        <h3>Editor's Newspapers:</h3>
+        {% if redactor.newspapers.all %}
+          <div class="list-group">
+            {% for newspaper in redactor.newspapers.all %}
+              <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}" 
+                 class="list-group-item list-group-item-action">
                 {{ newspaper.title }} ({{ newspaper.pub_date|date:"d.m.Y" }})
               </a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>The editor has no newspapers yet.</p>
-      {% endif %}
-    </div>
-    <div class="actions">
-      <a href="{% url 'newspaper:redactor-list' %}">Back to list</a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-muted">The editor has no newspapers yet.</p>
+        {% endif %}
+      </div>
+
+      <div class="btn-group mt-3">
+        <a href="{% url 'newspaper:redactor-list' %}" class="btn btn-sm btn-secondary">Back</a>
+        <a href="{% url 'newspaper:redactor-update' redactor.pk %}" class="btn btn-sm btn-warning">Update</a>
+        <a href="{% url 'newspaper:redactor-delete' redactor.pk %}" class="btn btn-sm btn-danger">Delete</a>
+      </div>
     </div>
   </div>
 {% endblock %}

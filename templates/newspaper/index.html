@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container py-5">
+    <h1 class="text-center mb-5">News Agency Statistics</h1>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">Newspapers</h5>
+            <p class="card-text display-4">{{ newspapers_count }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">Topics</h5>
+            <p class="card-text display-4">{{ topics_count }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">Editors</h5>
+            <p class="card-text display-4">{{ publishers_count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">News Agency Management System</h1>
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Project Overview</h2>
+            <p class="card-text">
+              This system helps newspaper agencies track and manage their publications and editorial staff. Key features
+              include:
+            </p>
+
+            <h3>Core Features:</h3>
+            <ul>
+              <li>Track newspapers with titles, content, and publication dates</li>
+              <li>Manage editors (redactors) and their experience levels</li>
+              <li>Organize content by topics</li>
+              <li>Associate multiple editors with each newspaper</li>
+              <li>Assign multiple topics to newspapers</li>
+            </ul>
+
+            <h3>System Components:</h3>
+            <div class="mt-3">
+              <h4>1. Newspapers</h4>
+              <p>Manage publications with detailed information including:</p>
+              <ul>
+                <li>Title and content</li>
+                <li>Publication date</li>
+                <li>Associated topics</li>
+                <li>Assigned editors</li>
+              </ul>
+
+              <h4>2. Editors (Redactors)</h4>
+              <p>Track editorial staff information:</p>
+              <ul>
+                <li>Personal details</li>
+                <li>Years of experience</li>
+                <li>Published newspapers</li>
+              </ul>
+
+              <h4>3. Topics</h4>
+              <p>Categorize newspapers by topics for better organization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
