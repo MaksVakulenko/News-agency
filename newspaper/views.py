@@ -47,6 +47,7 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
         date_from = self.request.GET.get("date_from")
         date_to = self.request.GET.get("date_to")
 
@@ -54,6 +55,17 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
             queryset = queryset.filter(pub_date__gte=date_from)
         if date_to:
             queryset = queryset.filter(pub_date__lte=date_to)
+
+        topic_id = self.request.GET.get("topic")
+        if topic_id:
+            queryset = queryset.filter(topic__id=topic_id)
+
+        search = self.request.GET.get("search")
+        if search:
+            q_objects = Q()
+            for field in self.search_fields:
+                q_objects |= Q(**{f"{field}__contains": search})
+            queryset = queryset.filter(q_objects)
 
         return queryset
 

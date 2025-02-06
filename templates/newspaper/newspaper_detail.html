@@ -5,7 +5,7 @@
     <div class="card-body">
       <h1 class="card-title">{{ newspaper.title }}</h1>
       <p class="text-muted">{{ newspaper.pub_date }}</p>
-      
+
       <div class="card-text">
         {{ newspaper.content }}
       </div>
@@ -13,16 +13,17 @@
       <div class="topics">
         <h3>Topics:</h3>
         {% for topic in newspaper.topic.all %}
-          <span class="badge badge-primary">{{ topic.name }}</span>
+          <span class="badge bg-primary">{{ topic.name }}</span>
         {% endfor %}
       </div>
 
       <div class="publishers">
         <h3>Publishers:</h3>
         {% for publisher in newspaper.publishers.all %}
-          <span class="badge badge-secondary">{{ publisher.get_full_name }}</span>
+          <span class="badge bg-secondary">{{ publisher.get_full_name }}</span>
         {% endfor %}
       </div>
+  
 
       <div class="btn-group">
         <a href="{% url 'newspaper:newspaper-list' %}" class="btn btn-sm btn-secondary">Back</a>
