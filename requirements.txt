@@ -1,3 +1,13 @@
-Django>=5.1.5
-crispy-bootstrap5
-django-crispy-forms
+asgiref==3.8.1
+black==25.1.0
+click==8.1.8
+colorama==0.4.6
+crispy-bootstrap5==2024.10
+Django==5.1.5
+django-crispy-forms==2.3
+mypy-extensions==1.0.0
+packaging==24.2
+pathspec==0.12.1
+platformdirs==4.3.6
+sqlparse==0.5.3
+tzdata==2025.1
