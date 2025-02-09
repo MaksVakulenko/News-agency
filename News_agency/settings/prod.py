@@ -35,3 +35,11 @@ DATABASES = {
        },
    }
 }
+
+#  admin user credentials
+ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'admin')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@example.com')
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', "s30HzR0MLs")
+ADMIN_FIRST_NAME = os.getenv('ADMIN_FIRST_NAME', 'Joe')
+ADMIN_LAST_NAME = os.getenv('ADMIN_LAST_NAME', 'Doe')
+ADMIN_YEARS_OF_EXPERIENCE = os.getenv('ADMIN_YEARS_OF_EXPERIENCE', 10)
