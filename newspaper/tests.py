@@ -185,7 +185,7 @@ class UserAuthenticationTests(TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
-            response.url.startswith(reverse("newspaper:newspaper-list"))
+            response.url.startswith(reverse("newspaper:index"))
         )
 
         user = response.wsgi_request.user
