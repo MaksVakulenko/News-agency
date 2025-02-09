@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
-from .models import Newspaper, Redactor
+
+from newspaper.models import Newspaper, Redactor
 
 
 class NewspaperForm(forms.ModelForm):
-    pub_date = forms.DateTimeField(
+    publishing_date = forms.DateTimeField(
         required=False,
         widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
         initial=timezone.now,
@@ -13,7 +14,7 @@ class NewspaperForm(forms.ModelForm):
 
     class Meta:
         model = Newspaper
-        fields = ["title", "content", "pub_date", "topic", "publishers"]
+        fields = ["title", "content", "publishing_date", "topics", "publishers"]
 
 
 class RedactorCreationForm(UserCreationForm):

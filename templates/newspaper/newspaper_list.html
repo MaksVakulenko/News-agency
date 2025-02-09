@@ -35,11 +35,11 @@
           </div>
         </div>
         <div class="col-md-2">
-          <select name="topic" class="form-select">
+          <select name="topics" class="form-select">
             <option value="">All Topics</option>
             {% for topic in topics %}
               <option value="{{ topic.id }}"
-                  {% if request.GET.topic|stringformat:"s" == topic.id|stringformat:"s" %}
+                  {% if request.GET.topics|stringformat:"s" == topic.id|stringformat:"s" %}
                       selected{% endif %}>
                 {{ topic.name }}
               </option>
@@ -61,7 +61,7 @@
                 <h5 class="card-title">{{ newspaper.title }}</h5>
                 <p class="text-muted mb-2">
                   <small>
-                    Published: {{ newspaper.pub_date|date:"d.m.Y H:i" }}
+                    Published: {{ newspaper.publishing_date|date:"d.m.Y H:i" }}
                   </small>
                 </p>
                 <p class="text-muted mb-2">
@@ -71,7 +71,7 @@
                       {{ publisher.get_full_name }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                     <div class="topics mb-2">
-                      {% for topic in newspaper.topic.all %}
+                      {% for topic in newspaper.topics.all %}
                         <span class="badge bg-secondary me-1">{{ topic.name }}</span>
                       {% endfor %}
                     </div>

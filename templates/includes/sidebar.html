@@ -4,7 +4,7 @@
     <div class="navbar-nav">
       <a class="nav-link" href="{% url 'newspaper:index' %}">Home</a>
       <a class="nav-link" href="{% url 'newspaper:newspaper-list' %}">Newspapers</a>
-      <a class="nav-link" href="{% url 'newspaper:topic-list' %}">Topics</a>
+      <a class="nav-link" href="{% url 'newspaper:topics-list' %}">Topics</a>
       <a class="nav-link" href="{% url 'newspaper:redactor-list' %}">Publishers</a>
       {% if user.is_authenticated %}
         <form method="post" action="{% url 'logout' %}" style="display: inline;">

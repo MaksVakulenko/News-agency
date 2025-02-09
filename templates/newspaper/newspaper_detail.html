@@ -4,7 +4,7 @@
   <div class="newspaper-detail card">
     <div class="card-body">
       <h1 class="card-title">{{ newspaper.title }}</h1>
-      <p class="text-muted">{{ newspaper.pub_date }}</p>
+      <p class="text-muted">{{ newspaper.publishing_date }}</p>
 
       <div class="card-text">
         {{ newspaper.content }}
@@ -12,7 +12,7 @@
 
       <div class="topics">
         <h3>Topics:</h3>
-        {% for topic in newspaper.topic.all %}
+        {% for topic in newspaper.topics.all %}
           <span class="badge bg-primary">{{ topic.name }}</span>
         {% endfor %}
       </div>

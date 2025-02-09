@@ -14,7 +14,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="m-0">Topics</h2>
-      <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary">
+      <a href="{% url 'newspaper:topics-create' %}" class="btn btn-primary">
         <i class="fas fa-plus">+</i>
       </a>
     </div>
@@ -24,11 +24,11 @@
         <div class="list-group-item d-flex justify-content-between align-items-center">
           <span>{{ topic.name }}</span>
           <div class="btn-group">
-            <a href="{% url 'newspaper:topic-update' topic.pk %}"
+            <a href="{% url 'newspaper:topics-update' topic.pk %}"
                class="btn btn-sm btn-outline-secondary">
               Update
             </a>
-            <a href="{% url 'newspaper:topic-delete' topic.pk %}"
+            <a href="{% url 'newspaper:topics-delete' topic.pk %}"
                class="btn btn-sm btn-outline-danger">
               Delete
             </a>

@@ -18,7 +18,7 @@
             {% for newspaper in redactor.newspapers.all %}
               <a href="{% url 'newspaper:newspaper-detail' newspaper.pk %}" 
                  class="list-group-item list-group-item-action">
-                {{ newspaper.title }} ({{ newspaper.pub_date|date:"d.m.Y" }})
+                {{ newspaper.title }} ({{ newspaper.publishing_date|date:"d.m.Y" }})
               </a>
             {% endfor %}
           </div>

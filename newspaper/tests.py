@@ -9,11 +9,11 @@ class NewspaperCRUDTests(TestCase):
         self.redactor = Redactor.objects.create_user(
             username="testuser", password="testpass123", years_of_experience=5
         )
-        self.topic = Topic.objects.create(name="Test Topic")
+        self.topics = Topic.objects.create(name="Test Topic")
         self.newspaper = Newspaper.objects.create(
             title="Test News", content="Test Content"
         )
-        self.newspaper.topic.add(self.topic)
+        self.newspaper.topics.add(self.topics)
         self.newspaper.publishers.add(self.redactor)
         self.client.login(username="testuser", password="testpass123")
 
@@ -23,7 +23,7 @@ class NewspaperCRUDTests(TestCase):
             {
                 "title": "New News",
                 "content": "New Content",
-                "topic": [self.topic.id],
+                "topics": [self.topics.id],
                 "publishers": [self.redactor.id],
             },
         )
@@ -33,7 +33,7 @@ class NewspaperCRUDTests(TestCase):
     def test_create_newspaper_invalid_data(self):
         response = self.client.post(
             reverse("newspaper:newspaper-create"),
-            {"title": "", "content": "", "topic": [], "publishers": []},
+            {"title": "", "content": "", "topics": [], "publishers": []},
         )
         self.assertEqual(response.status_code, 200)
         form = response.context["form"]
@@ -52,7 +52,7 @@ class NewspaperCRUDTests(TestCase):
             {
                 "title": "Updated News",
                 "content": "Updated Content",
-                "topic": [self.topic.id],
+                "topics": [self.topics.id],
                 "publishers": [self.redactor.id],
             },
         )
@@ -65,12 +65,14 @@ class NewspaperCRUDTests(TestCase):
             reverse("newspaper:newspaper-delete", args=[self.newspaper.pk])
         )
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(Newspaper.objects.filter(pk=self.newspaper.pk).exists())
+        self.assertFalse(
+            Newspaper.objects.filter(pk=self.newspaper.pk).exists()
+        )
 
 
 class TopicCRUDTests(TestCase):
     def setUp(self):
-        self.topic = Topic.objects.create(name="Test Topic")
+        self.topics = Topic.objects.create(name="Test Topic")
 
     def test_crud_operations(self):
         new_topic = Topic.objects.create(name="New Topic")
@@ -117,7 +119,9 @@ class RedactorCRUDTests(TestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(Redactor.objects.filter(username="newredactor").exists())
+        self.assertTrue(
+            Redactor.objects.filter(username="newredactor").exists()
+        )
 
     def test_create_redactor_invalid_data(self):
         response = self.client.post(
@@ -161,7 +165,9 @@ class RedactorCRUDTests(TestCase):
             reverse("newspaper:redactor-delete", args=[self.test_redactor.pk])
         )
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(Redactor.objects.filter(pk=self.test_redactor.pk).exists())
+        self.assertFalse(
+            Redactor.objects.filter(pk=self.test_redactor.pk).exists()
+        )
 
 
 class UserAuthenticationTests(TestCase):
@@ -178,7 +184,9 @@ class UserAuthenticationTests(TestCase):
             self.login_url, {"username": "testuser", "password": "testpass123"}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("newspaper:newspaper-list")))
+        self.assertTrue(
+            response.url.startswith(reverse("newspaper:newspaper-list"))
+        )
 
         user = response.wsgi_request.user
         self.assertTrue(user.is_authenticated)

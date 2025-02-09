@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
-from .forms import NewspaperForm, RedactorCreationForm
-from .models import Newspaper, Topic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
-from .models import Redactor
+
+from newspaper.forms import NewspaperForm, RedactorCreationForm
+from newspaper.models import Newspaper, Topic, Redactor
 
 
 def index(request):
@@ -33,7 +33,7 @@ class SearchListView(generic.ListView):
         return queryset
 
 
-class NewspaperListView(SearchListView, LoginRequiredMixin):
+class NewspaperListView(LoginRequiredMixin, SearchListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     context_object_name = "newspapers"
@@ -52,13 +52,13 @@ class NewspaperListView(SearchListView, LoginRequiredMixin):
         date_to = self.request.GET.get("date_to")
 
         if date_from:
-            queryset = queryset.filter(pub_date__gte=date_from)
+            queryset = queryset.filter(publishing_date__gte=date_from)
         if date_to:
-            queryset = queryset.filter(pub_date__lte=date_to)
+            queryset = queryset.filter(publishing_date__lte=date_to)
 
-        topic_id = self.request.GET.get("topic")
-        if topic_id:
-            queryset = queryset.filter(topic__id=topic_id)
+        topics_id = self.request.GET.get("topics")
+        if topics_id:
+            queryset = queryset.filter(topics__id=topics_id)
 
         search = self.request.GET.get("search")
         if search:
@@ -75,7 +75,7 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "newspaper/newspaper_detail.html"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related("publishers", "topic")
+        return super().get_queryset().prefetch_related("publishers", "topics")
 
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
@@ -98,7 +98,7 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
-class TopicListView(SearchListView, LoginRequiredMixin):
+class TopicListView(LoginRequiredMixin, SearchListView):
     model = Topic
     template_name = "newspaper/topic_list.html"
     context_object_name = "topics"
@@ -110,23 +110,23 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
     model = Topic
     fields = ["name"]
     template_name = "newspaper/topic_form.html"
-    success_url = reverse_lazy("newspaper:topic-list")
+    success_url = reverse_lazy("newspaper:topics-list")
 
 
 class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Topic
     fields = ["name"]
     template_name = "newspaper/topic_form.html"
-    success_url = reverse_lazy("newspaper:topic-list")
+    success_url = reverse_lazy("newspaper:topics-list")
 
 
 class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     template_name = "newspaper/topic_confirm_delete.html"
-    success_url = reverse_lazy("newspaper:topic-list")
+    success_url = reverse_lazy("newspaper:topics-list")
 
 
-class RedactorListView(SearchListView, LoginRequiredMixin):
+class RedactorListView(LoginRequiredMixin, SearchListView):
     model = Redactor
     template_name = "newspaper/redactor_list.html"
     context_object_name = "redactors"
@@ -152,7 +152,10 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    fields = ["username", "first_name", "last_name", "email", "years_of_experience"]
+    fields = [
+        "username",
+        "first_name",
+        "last_name", "email", "years_of_experience"]
     template_name = "newspaper/redactor_form.html"
     success_url = reverse_lazy("newspaper:redactor-list")
 
